@@ -2,10 +2,16 @@ package com.equifax.dev.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "PRODUCTOS")
@@ -21,9 +27,18 @@ public class Producto implements Serializable{
 	
 	private String nombreProducto;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaCreacion;
 	
 	private String estado;
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            },
+            mappedBy = "productos")	
+	private List<Cliente> Clientes;
 	
 	public Producto() {
 		
@@ -66,5 +81,13 @@ public class Producto implements Serializable{
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}	
+	}
+
+	public List<Cliente> getClientes() {
+		return Clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		Clientes = clientes;
+	}		
 }
