@@ -39,9 +39,9 @@ public class Cliente implements Serializable{
                 CascadeType.PERSIST,
                 CascadeType.MERGE
             })
-    @JoinTable(name = "cliente_producto",
-            joinColumns = { @JoinColumn(name = "idcliente") },
-            inverseJoinColumns = { @JoinColumn(name = "idproducto") })
+    @JoinTable(name = "productoCliente",
+            joinColumns = { @JoinColumn(name = "idCliente") },
+            inverseJoinColumns = { @JoinColumn(name = "idProducto") })
 	private List<Producto> productos ;
 	
 	public Cliente() {
